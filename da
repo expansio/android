@@ -1,0 +1,141 @@
+[1mdiff --git a/build.gradle b/build.gradle[m
+[1mindex bbda75e..2e6d071 100644[m
+[1m--- a/build.gradle[m
+[1m+++ b/build.gradle[m
+[36m@@ -32,31 +32,20 @@[m [mdependencies {[m
+     /// dependencies for app building[m
+     compile name: 'touch-image-view'[m
+     compile project(':owncloud-android-library')[m
+[31m-    compile "com.android.support:support-v4:${supportLibraryVersion}"[m
+[31m-    compile "com.android.support:design:${supportLibraryVersion}"[m
+[31m-    compile 'com.jakewharton:disklrucache:2.0.2'[m
+[31m-    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"[m
+[31m-    compile 'com.getbase:floatingactionbutton:1.10.1'[m
+[31m-[m
+[31m-[m
+[32m+[m[32m    compile "com.android.support:support-v4:${supportLibraryVersion}" compile "com.android.support:design:${supportLibraryVersion}" compile 'com.jakewharton:disklrucache:2.0.2'[m
+[32m+[m[32m    compile "com.android.support:appcompat-v7:${supportLibraryVersion}" compile 'com.getbase:floatingactionbutton:1.10.1'[m
+     /// dependencies for local unit tests[m
+     testCompile 'junit:junit:4.12'[m
+     testCompile 'org.mockito:mockito-core:1.10.19'[m
+[31m-[m
+[31m-[m
+     /// dependencies for instrumented tests[m
+     // JUnit4 Rules[m
+     androidTestCompile 'com.android.support.test:rules:0.5'[m
+[31m-[m
+     // Android JUnit Runner[m
+     androidTestCompile 'com.android.support.test:runner:0.5'[m
+[31m-[m
+     // Espresso core[m
+     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'[m
+[31m-[m
+     // UIAutomator - for cross-app UI tests, and to grant screen is turned on in Espresso tests[m
+     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'[m
+[31m-[m
+ }[m
+ [m
+ tasks.withType(Test) {[m
+[36m@@ -131,6 +120,9 @@[m [mandroid {[m
+                 keyAlias System.env.OC_RELEASE_KEY_ALIAS[m
+                 keyPassword System.env.OC_RELEASE_KEY_PASSWORD[m
+             }[m
+[32m+[m[32m            keyAlias 'expansio-release'[m
+[32m+[m[32m            keyPassword 'EXp8584458sio'[m
+[32m+[m[32m            storePassword 'EXp8584458sio'[m
+         }[m
+     }[m
+ [m
+[36m@@ -139,6 +131,9 @@[m [mandroid {[m
+             if (System.env.OC_RELEASE_KEYSTORE) {[m
+                 signingConfig signingConfigs.release[m
+             }[m
+[32m+[m[32m            debuggable false[m
+[32m+[m[32m            jniDebuggable false[m
+[32m+[m[32m            signingConfig signingConfigs.release[m
+         }[m
+     }[m
+ [m
+[1mdiff --git a/owncloud-android-library b/owncloud-android-library[m
+[1mindex 1b19115..a13b5ec 160000[m
+[1m--- a/owncloud-android-library[m
+[1m+++ b/owncloud-android-library[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit 1b191151ed937cfdd07b1d28f31e663e1ed4a79b[m
+[32m+[m[32mSubproject commit a13b5ec17c9e9550e519a884fca0d428c4f96507[m
+[1mdiff --git a/res/values/setup.xml b/res/values/setup.xml[m
+[1mindex 33e604a..d6bebbe 100644[m
+[1m--- a/res/values/setup.xml[m
+[1m+++ b/res/values/setup.xml[m
+[36m@@ -1,24 +1,24 @@[m
+ <?xml version="1.0" encoding="utf-8"?>[m
+ <resources>[m
+     <!-- App name  and other strings-->[m
+[31m-    <string name="app_name">ownCloud</string>[m
+[31m-    <string name="account_type">owncloud</string>	<!-- better if was a domain name; but changing it now would require migrate accounts when the app is updated -->[m
+[32m+[m[32m    <string name="app_name">Expansio Docs</string>[m
+[32m+[m[32m    <string name="account_type">expansio</string>	<!-- better if was a domain name; but changing it now would require migrate accounts when the app is updated -->[m
+     <string name="authority">org.owncloud</string>[m
+     <string name="document_provider_authority">org.owncloud.documents</string>[m
+     <string name="search_suggest_authority">org.owncloud.search.users_and_groups</string>[m
+     <string name="search_suggest_intent_action">org.owncloud.search.users_and_groups.action.SHARE_WITH</string>[m
+[31m-    <string name ="db_file">owncloud.db</string>[m
+[31m-    <string name ="db_name">ownCloud</string>[m
+[31m-    <string name ="data_folder">owncloud</string>[m
+[31m-    <string name ="log_name">Owncloud_</string>[m
+[31m-    <string name ="default_display_name_for_root_folder">ownCloud</string>[m
+[32m+[m[32m    <string name ="db_file">expansio.db</string>[m
+[32m+[m[32m    <string name ="db_name">ExpansioDocs</string>[m
+[32m+[m[32m    <string name ="data_folder">expansio</string>[m
+[32m+[m[32m    <string name ="log_name">expansio_</string>[m
+[32m+[m[32m    <string name ="default_display_name_for_root_folder">Expansio Docs</string>[m
+     <string name ="user_agent">Mozilla/5.0 (Android) ownCloud-android/%1$s</string>[m
+     [m
+     <!-- URLs and flags related -->[m
+     <string name="server_url"></string>[m
+     <bool name="show_server_url_input">true</bool>[m
+     <bool name="show_welcome_link">true</bool>[m
+[31m-	<string name="welcome_link_url">"https://owncloud.com/mobile/new"</string>[m
+[32m+[m	[32m<string name="welcome_link_url">"http://46.101.11.180/index.php/login"</string>[m
+ 	<string name="share_api_link"></string>[m
+     [m
+     <!-- Flags to setup the authentication methods available in the app -->[m
+[36m@@ -37,8 +37,8 @@[m
+     <color name="login_background_color">#FFFFFF</color>[m
+     <color name="login_logo_background_color">#FFFFFF</color>[m
+     <color name="background_color">#FFFFFF</color>[m
+[31m-    <color name="actionbar_start_color">#1D2D44</color>[m
+[31m-    <color name="actionbar_end_color">#1D2D44</color>[m
+[32m+[m[32m    <color name="actionbar_start_color">#00798C</color>[m
+[32m+[m[32m    <color name="actionbar_end_color">#00798C</color>[m
+     <color name="primary_button_background_color">@color/owncloud_blue_accent</color>[m
+     <color name="primary_button_text_color">@color/white</color>[m
+     <color name="secondary_button_background_color">#D6D7D7</color>[m
+[36m@@ -61,11 +61,11 @@[m
+     <bool name="recommend_enabled">true</bool>[m
+     <bool name="feedback_enabled">true</bool>[m
+     <bool name="logger_enabled">false</bool>[m
+[31m-    <string name="url_help">http://owncloud.com/mobile/help</string>[m
+[32m+[m[32m    <string name="url_help">http://www.expans.io/</string>[m
+     <string name="url_imprint"></string>[m
+     <string name="mail_recommend">"mailto:"</string>[m
+[31m-    <string name="mail_feedback">"mailto:apps@owncloud.com"</string>[m
+[31m-    <string name="url_app_download">"https://play.google.com/store/apps/details?id=com.owncloud.android"</string>[m
+[32m+[m[32m    <string name="mail_feedback">"mailto:office@expans.io"</string>[m
+[32m+[m[32m    <string name="url_app_download">"http://www.expans.io/"</string>[m
+ [m
+     <!--Destination mail for sending log files -->[m
+     <string name="mail_logger"></string>[m
+[1mdiff --git a/src/com/owncloud/android/MainApp.java b/src/com/owncloud/android/MainApp.java[m
+[1mindex 1e8a3e0..623b580 100644[m
+[1m--- a/src/com/owncloud/android/MainApp.java[m
+[1m+++ b/src/com/owncloud/android/MainApp.java[m
+[36m@@ -81,7 +81,7 @@[m [mpublic class MainApp extends Application {[m
+             // Set folder for store logs[m
+             Log_OC.setLogDataFolder(dataFolder);[m
+ [m
+[31m-            Log_OC.startLogging();[m
+[32m+[m[32m            Log_OC.startLogging(dataFolder);[m
+             Log_OC.d("Debug", "start logging");[m
+         }[m
+ [m
