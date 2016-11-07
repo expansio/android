@@ -479,7 +479,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
                 return false;
             }
         });
-     
+
         
         /// step 4 - mark automatic check to be started when OperationsService is ready
         mPendingAutoCheck = (savedInstanceState == null && 
